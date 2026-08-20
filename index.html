@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>卡塔尔航空 · 旅客旅程图与服务蓝图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <img class="logo" src="assets/qr-logo.png" alt="Qatar Airways">
+    <div class="links" id="nav-links">
+      <a href="#emotion">情绪曲线</a>
+      <a href="#journey">13 阶段旅程</a>
+      <a href="#blueprint">服务蓝图</a>
+      <a href="#transfer">多哈转机</a>
+      <a href="#moments">关键时刻</a>
+      <a href="#recovery">服务补救</a>
+      <a href="#opps">设计机会</a>
+      <a href="#metrics">指标</a>
+      <a href="#personas">旅客画像</a>
+      <a href="#sources">来源与假设</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">服务设计研究 · SERVICE DESIGN RESEARCH · 2026</div>
+    <h1>旅客旅程图与服务蓝图<span class="accent">Passenger Journey Map &amp; Service Blueprint</span></h1>
+    <p class="sub">13 stages · 21 swimlanes · bilingual — built from official public facts, research observations and marked design hypotheses</p>
+    <div class="macro-strip" id="macro-strip"></div>
+    <div class="tallies" id="tallies"></div>
+  </div>
+</header>
+
+<section id="emotion">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>情绪曲线</h2><span class="en">Emotional journey — expected vs observed</span></div>
+      <p class="sec-note">灰色虚线为期待体验，酒红实线为观察体验；节点对齐 13 个阶段中心。悬停查看各阶段情绪注解。</p>
+    </div>
+    <div class="chart-card">
+      <div class="chart-legend">
+        <span><span class="sw"></span>观察体验 Observed</span>
+        <span><span class="sw exp"></span>期待体验 Expected</span>
+      </div>
+      <div id="emo-chart"></div>
+    </div>
+  </div>
+</section>
+
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>13 阶段旅程</h2><span class="en">The end-to-end journey, stage by stage</span></div>
+      <div class="chips">
+        <span class="chip fact">官方事实 Official Fact</span>
+        <span class="chip obs">研究观察 Observation</span>
+        <span class="chip hyp">设计假设 Hypothesis</span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="rail" id="stage-rail"></div></div>
+</section>
+
+<section id="blueprint">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>服务蓝图</h2><span class="en">Service blueprint — three lines of visibility</span></div>
+      <p class="sec-note">左右滑动查看 13 个阶段；互动线 / 可见线 / 内部互动线分隔前台、后台与系统层。</p>
+    </div>
+    <div class="bp-scroll"><div class="bp" id="bp-grid"></div></div>
+  </div>
+</section>
+
+<section id="transfer">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>多哈转机与中断处置</h2><span class="en">Doha transfer &amp; disruption</span></div>
+    </div>
+    <div id="flows"></div>
+    <p class="sec-note" style="margin-top:14px">误接处置的内部 SLA 与临界旅客识别机制为设计假设；过境住宿条件、过境签窗口与 Stopover 定价为官方事实。<span class="en">Misconnect SLAs are hypotheses; transit-stay terms, visa window and stopover pricing are official.</span></p>
+  </div>
+</section>
+
+<section id="moments">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>关键时刻</h2><span class="en">Key moments — where advocacy is won or lost</span></div></div>
+    <div class="grid g4" id="moments-grid"></div>
+  </div>
+</section>
+
+<section id="recovery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>服务补救手册</h2><span class="en">15 recovery playbooks · time promises are design targets, not official commitments</span></div>
+    </div>
+    <div class="grid g3" id="recovery-grid"></div>
+  </div>
+</section>
+
+<section id="opps">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>设计机会</h2><span class="en">Design opportunities — Now / Next / Later</span></div></div>
+    <div class="opp-cols" id="opp-cols"></div>
+  </div>
+</section>
+
+<section id="metrics">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>体验指标</h2><span class="en">Metric definitions — placeholders only, no invented data</span></div>
+    </div>
+    <div class="grid g4" id="metrics-grid"></div>
+  </div>
+</section>
+
+<section id="personas">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>旅客画像</h2><span class="en">Personas — one map, coverage by tags</span></div></div>
+    <div class="grid g4" id="personas-grid"></div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>来源与假设</h2><span class="en">Sources &amp; assumptions</span></div>
+      <div class="chips" id="src-tally"></div>
+    </div>
+    <div class="src-cols" id="src-cols"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>数据检索日期 2026-08-20 · 内容与 Figma 版《Qatar Airways — Journey Map &amp; Service Blueprint》同源（data/qatar-journey-content.json）。</p>
+    <p class="en">Icons: IBM Carbon Design System (Apache-2.0). Chart grammar informed by Lieflat Charts (PolyForm Noncommercial — referenced, not redistributed). Qatar Airways wordmark © Qatar Airways, used as brand reference in an internal design study. Type: Noto Sans SC + Inter (Jotia licensed face unavailable in this environment).</p>
+  </div>
+</footer>
+
+<div class="emo-tip" id="emo-tip"></div>
+<script src="data.js"></script>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
