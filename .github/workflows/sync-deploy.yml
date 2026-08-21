@@ -1,0 +1,81 @@
+name: Sync from Figma Make & Deploy
+
+# 轮询 QatarAirwaysJourneyMapDesign（Figma Make 自动同步仓）。
+# 有新提交时：类型检查 → 构建 → 更新本仓库 → GitHub Pages 自动重建。
+# 工作流放在本仓库是因为 Make 的全量同步会删除它仓库里的任何外来文件。
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-deploy
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pages repo
+        uses: actions/checkout@v4
+
+      - name: Checkout design source (read-only key)
+        uses: actions/checkout@v4
+        with:
+          repository: hellojaven-star/QatarAirwaysJourneyMapDesign
+          ssh-key: ${{ secrets.SRC_DEPLOY_KEY }}
+          path: source
+
+      - name: Skip if source unchanged
+        id: gate
+        run: |
+          SRC_SHA=$(git -C source rev-parse HEAD)
+          echo "sha=$SRC_SHA" >> "$GITHUB_OUTPUT"
+          if [ -f .source-sha ] && [ "$(cat .source-sha)" = "$SRC_SHA" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Source unchanged ($SRC_SHA) — nothing to do."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: pnpm/action-setup@v4
+        if: steps.gate.outputs.changed == 'true'
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.changed == 'true'
+        with:
+          node-version: 22
+
+      - name: Install & typecheck & build
+        if: steps.gate.outputs.changed == 'true'
+        working-directory: source
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm exec tsc --noEmit
+          pnpm run build
+        env:
+          FIGMA_PUBLIC_URL: /qr-journey-web
+
+      - name: Sync build output & push
+        if: steps.gate.outputs.changed == 'true'
+        run: |
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name .git ! -name .github ! -name README.md ! -name source \
+            -exec rm -rf {} +
+          cp -R source/dist/. .
+          rm -rf source
+          echo "${{ steps.gate.outputs.sha }}" > .source-sha
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Build output identical — recording source sha only."
+          fi
+          git config user.name "make-auto-deploy"
+          git config user.email "actions@users.noreply.github.com"
+          git commit -m "Auto-deploy from QatarAirwaysJourneyMapDesign@${SRC_SHORT}" || true
+          git push
+        env:
+          SRC_SHORT: ${{ steps.gate.outputs.sha }}
