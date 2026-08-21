@@ -11,7 +11,7 @@
   --hair:rgba(102,32,70,.12);
   --zh:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
   --en:"Inter","Helvetica Neue",Arial,sans-serif;
-  --maxw:1280px;
+  --maxw:1780px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -19,6 +19,7 @@ body{font-family:var(--zh);color:var(--ink);background:var(--paper);line-height:
 .en{font-family:var(--en);color:var(--grey3)}
 a{color:var(--burgundy);text-decoration:none}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+.wrap.bleed{max-width:none}
 .ic{width:20px;height:20px;fill:currentColor;flex:none}
 
 /* ---- nav ---- */
@@ -193,3 +194,25 @@ details.card .rp-body{padding:0 22px 18px;border-top:1px solid var(--b05)}
 footer{padding:44px 0 64px;color:var(--grey2);font-size:11.5px;line-height:1.9}
 footer .en{font-size:10.5px}
 @media(max-width:720px){.wrap{padding:0 18px} section{padding:52px 0} h2{font-size:24px}}
+
+/* ---- wide-display scale-up：宽屏自适应放大 ---- */
+@media(min-width:1500px){
+  .stage-card{flex:0 0 432px}
+  .stage-card .scene{transform:scale(1.2);margin:28px auto 16px}
+  .stage-card h3{font-size:20px}
+  .stage-card .h-en{font-size:13px}
+  .item{font-size:13.5px}
+  .item .en{font-size:11.5px}
+  .moment{font-size:13.5px}
+  .bp{grid-template-columns:220px repeat(13,368px);min-width:5004px;font-size:13px}
+  .bp .cell .en{font-size:11px}
+  .bp .lane-h{font-size:13.5px}
+  .bp .colhead{font-size:13px}
+  .fnode{flex:0 0 272px;font-size:13.5px}
+  .fnode .en{font-size:11.5px}
+}
+@media(min-width:2000px){
+  .stage-card{flex:0 0 472px}
+  .stage-card .scene{transform:scale(1.32);margin:38px auto 24px}
+  .bp{grid-template-columns:240px repeat(13,400px);min-width:5440px}
+}
